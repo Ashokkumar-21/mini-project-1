@@ -10,6 +10,8 @@ phases:
       - REPO_URI=098588167308.dkr.ecr.ap-south-1.amazonaws.com/ak_mini-1
       - IMAGE_TAG=V1
       - echo Configuring kubectl
+      - export KUBECONFIG=/root/.kube/config
+      - mkdir -p $(dirname $KUBECONFIG)
       - aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
       - aws sts get-caller-identity
       - kubectl get nodes
