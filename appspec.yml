@@ -2,11 +2,11 @@ version: 0.0
 os: linux
 
 files:
-  - source: /app
+  - source: /
     destination: /home/ec2-user/app/
 
 hooks:
   AfterInstall:
-    - location: app/deploy.sh
+    - location: deploy.sh
       timeout: 300
       runas: root
