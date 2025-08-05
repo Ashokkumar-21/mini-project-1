@@ -13,6 +13,8 @@ phases:
       - export KUBECONFIG=$HOME/.kube/config
       - mkdir -p $(dirname $KUBECONFIG)
       - aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
+      - cat $KUBECONFIG  
+      - kubectl config get-contexts 
       - aws sts get-caller-identity
       - kubectl get nodes
   build:
