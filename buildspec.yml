@@ -1,0 +1,32 @@
+version: 0.2
+
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR
+      - aws --version
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 098588167308.dkr.ecr.ap-south-1.amazonaws.com
+      - REPO_URI=098588167308.dkr.ecr.ap-south-1.amazonaws.com/ak_mini-1
+      - IMAGE_TAG=V1
+      - echo Configuring kubectl
+      - aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
+      - aws sts get-caller-identity
+      - kubectl get nodes
+  build:
+    commands:
+      - echo Building the Docker Image
+      - docker build -t $REPO_URI:$IMAGE_TAG .
+      - docker tag $REPO_URI:$IMAGE_TAG $REPO_URI:V1
+  post_build:
+    commands:
+      - echo Pushing the Docker Image
+      - docker push $REPO_URI:$IMAGE_TAG
+      - sed -i "s|IMAGE_PLACEHOLDER|$REPO_URI:$IMAGE_TAG|g" deployment.yaml
+      - sed -i "s|IMAGE_PLACEHOLDER|$REPO_URI:$IMAGE_TAG|g" appspec.yml
+      - echo Image File
+      - printf '[{"name":"mini1-app","imageUri":"%s"}]' $REPO_URI:$IMAGE_TAG > imagedefinitions.json
+artifacts:
+  files:
+    - imagedefinitions.json
+
