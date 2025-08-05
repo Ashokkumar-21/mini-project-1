@@ -1,4 +1,9 @@
 #!/bin/bash
+
+echo "Deploying Application"
+
+export KUBECONFIG=/home/ec2-user/.kube/config
+
 cd /home/ec2-user/app/
 
 echo "Running kubectl apply..."
