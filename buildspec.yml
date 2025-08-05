@@ -13,12 +13,8 @@ phases:
       - export KUBECONFIG=$HOME/.kube/config
       - mkdir -p $(dirname $KUBECONFIG)
       - aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
-      - cat $KUBECONFIG  
-<<<<<<< HEAD
-      - kubectl config get-contexts 
-=======
+      - cat $KUBECONFIG
       - kubectl config get-contexts
->>>>>>> a69e099 (CodeDeploy Commit)
       - aws sts get-caller-identity
       - kubectl get nodes
   build:
@@ -37,4 +33,3 @@ phases:
 artifacts:
   files:
     - imagedefinitions.json
-
