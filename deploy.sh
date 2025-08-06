@@ -2,7 +2,9 @@
 
 echo "Deploying Application"
 
-export KUBECONFIG=/home/ec2-user/.kube/config
+echo "Update Kubeconfig"
+
+aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
 
 cd /home/ec2-user/app/
 
