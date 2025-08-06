@@ -58,6 +58,8 @@ Step_1:
     sudo mv ./aws-iam-authenticator /usr/local/bin
     aws-iam-authenticator version
 
+1.5 Add IAM CodeDeploy Role
+
 Step_2:
 
     Create ECR
@@ -71,7 +73,7 @@ Step_3:
 Step_4:
 
     Create Docekrfile
-    Create Image with the Dockerfile Build and check it 
+    Create Image with the Dockerfile Build and check it locally
 
 Step_5:
 
@@ -85,11 +87,70 @@ Step_6:
     Create CodeBuild
     Source GitHub
     Environment Amazon Linux
+    Enable CloudWatch
+    Add AWSCodeBuild Policie
+    Add AmazonS3 Policie
+    Add eks Policie
+    Add EC2ContainerRegistry Policie
+    Add EKSCluster Policie
+    Add EKSWorkerNode Policie
+    Add CloudWatchLogs Policie
+    Add CodePipeline Policie
+
 
 Setp_7:
 
     Create appspec.yml
+    Create deploy.sh
     Create CodeDeploy
     Create Code Deployment Group
     Create Create Deployment
-    Instal CodeDeploy Agent at EC2
+    Install CodeDeploy Agent at EC2
+    Add AWSCodeDeploy Policie
+    Add AmazonS3 Policie
+    Add eks Policie
+
+Step_8:
+
+    Run CodePipeline
+    Clear the Errors
+    Source Get File from the Git Repo
+    Source Succeeded
+    Using buildspec.yml Download Source
+    aws Login
+    Point Udate kubeconfig to Cluster
+    Using Dockerfile Create Image and Push to ECR
+    Create BuildArtifacts and upload to S3
+    Build Succeeded
+    Using appspec.yml Donload BuildArtifacts from s3
+    Copy files to local EC2
+    Run Deploy.sh script
+    Apply deployment.yaml
+    Pods created with images form ECR
+    Apply service.yaml
+    Load Balancer Created and Expose to Por 3000
+    Deploy Succeeded
+
+Step_9:
+
+    Check Pods get Created
+    kubectl get pods
+    Get Loadbalancer status
+    kubectl get svc
+
+Step_10:
+
+    Check Pipeline Logs At CloudWatch Log Groups
+
+
+GitHub Repo Link: https://github.com/Ashokkumar-21/mini-project-1
+
+    
+
+
+    
+
+
+
+
+
