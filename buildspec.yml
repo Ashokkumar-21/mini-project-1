@@ -38,3 +38,5 @@ artifacts:
     - deployment.yaml
     - appspec.yml
     - imagedefinitions.json
+    - deploy.sh
+    - service.yaml 
