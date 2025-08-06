@@ -1,6 +1,5 @@
 version: 0.2
 
-
 phases:
   pre_build:
     commands:
@@ -13,15 +12,16 @@ phases:
       - export KUBECONFIG=$HOME/.kube/config
       - mkdir -p $(dirname $KUBECONFIG)
       - aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
-      - cat $KUBECONFIG
       - kubectl config get-contexts
       - aws sts get-caller-identity
       - kubectl get nodes
+
   build:
     commands:
       - echo Building the Docker Image
       - docker build -t $REPO_URI:$IMAGE_TAG .
       - docker tag $REPO_URI:$IMAGE_TAG $REPO_URI:V1
+
   post_build:
     commands:
       - echo Pushing the Docker Image
@@ -29,7 +29,12 @@ phases:
       - sed -i "s|IMAGE_PLACEHOLDER|$REPO_URI:$IMAGE_TAG|g" deployment.yaml
       - sed -i "s|IMAGE_PLACEHOLDER|$REPO_URI:$IMAGE_TAG|g" appspec.yml
       - echo Image File
+      - cat deployment.yaml
+      - cat appspec.yml
       - printf '[{"name":"mini1-app","imageUri":"%s"}]' $REPO_URI:$IMAGE_TAG > imagedefinitions.json
+
 artifacts:
   files:
+    - deployment.yaml
+    - appspec.yml
     - imagedefinitions.json
