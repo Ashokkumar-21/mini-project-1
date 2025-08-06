@@ -12,8 +12,6 @@ phases:
       - export KUBECONFIG=$HOME/.kube/config
       - mkdir -p $(dirname $KUBECONFIG)
       - aws eks update-kubeconfig --region ap-south-1 --name mini1-cluster
-      - kubectl config get-contexts
-      - aws sts get-caller-identity
       - kubectl get nodes
 
   build:
@@ -27,7 +25,6 @@ phases:
       - echo Pushing the Docker Image
       - docker push $REPO_URI:$IMAGE_TAG
       - sed -i "s|IMAGE_PLACEHOLDER|$REPO_URI:$IMAGE_TAG|g" deployment.yaml
-      - sed -i "s|IMAGE_PLACEHOLDER|$REPO_URI:$IMAGE_TAG|g" appspec.yml
       - echo Image File
       - cat deployment.yaml
       - cat appspec.yml
