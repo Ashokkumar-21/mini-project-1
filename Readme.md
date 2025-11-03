@@ -1,4 +1,4 @@
-GUVI DEVEOPS MIN PROJECT 1
+DEVEOPS MIN PROJECT 1
 Application Deployment
 (Deploy the given React application to a production ready state)
 Source:https://github.com/Vennilavan12/Brain-Tasks-App.git
@@ -149,6 +149,7 @@ GitHub Repo Link: https://github.com/Ashokkumar-21/mini-project-1
 
 
     
+
 
 
 
